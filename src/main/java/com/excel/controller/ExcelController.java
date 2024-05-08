@@ -22,8 +22,7 @@ public class ExcelController {
         return excelService.getData();
     }
 
-    // You can also schedule it to send data at regular intervals
-    @Scheduled(fixedRate = 2000) // every 2 seconds
+    @Scheduled(fixedRate = 5000)
     public void sendDataAutomatically() {
         sendExcelData();
     }
