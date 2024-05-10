@@ -18,19 +18,20 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/topic")
-                .setTaskScheduler(heartBeatScheduler());
+        registry.enableSimpleBroker("/topic");
         registry.setApplicationDestinationPrefixes("/app");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/websocket-excel").withSockJS();
+        registry.addEndpoint("/websocket-excel")
+        .setAllowedOriginPatterns("*")
+            .withSockJS();
     }
 
     @Bean
     public TaskScheduler heartBeatScheduler() {
-        return new ConcurrentTaskScheduler(); // Default task scheduler
+        return new ConcurrentTaskScheduler(); 
     }
 
     @Bean
