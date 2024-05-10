@@ -28,31 +28,5 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         .setAllowedOriginPatterns("*")
             .withSockJS();
     }
-
-    @Bean
-    public TaskScheduler heartBeatScheduler() {
-        return new ConcurrentTaskScheduler(); 
-    }
-
-    @Bean
-    public ThreadPoolTaskExecutor messageExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(4);
-        executor.setMaxPoolSize(10);
-        executor.setQueueCapacity(100);
-        executor.setThreadNamePrefix("WebSocketExecutor-");
-        executor.initialize();
-        return executor;
-    }
-
-    @Override
-    public void configureClientInboundChannel(ChannelRegistration registration) {
-        registration.taskExecutor(messageExecutor());
-    }
-
-    @Override
-    public void configureClientOutboundChannel(ChannelRegistration registration) {
-        registration.taskExecutor(messageExecutor());
-    }
 }
 

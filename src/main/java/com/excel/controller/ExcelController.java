@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.excel.service.ExcelService;
 
@@ -20,18 +19,15 @@ public class ExcelController {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-    @Scheduled(fixedRate = 100)
-    public void sendDataAutomatically() {
+   
+    @Scheduled(fixedRate = 5000)
+    public void sendData() {
         List<String[]> excelData = excelService.getData();
-        if (!excelData.isEmpty()) {
-            messagingTemplate.convertAndSend("/topic/excelData", excelData);
-            System.out.println("ExcelData: " + Arrays.deepToString(excelData.toArray()));
-        }
+        messagingTemplate.convertAndSend("/topic/excelData", excelData);
+        System.out.println("excelData" + Arrays.deepToString(excelData.toArray()));
         
-        int rowCount = excelData.size();
-        if (rowCount > 0) {
-            messagingTemplate.convertAndSend("/topic/count", rowCount);
-            System.out.println("Number of Excel Data Rows: " + rowCount);
-        }
+        int rowCount = excelService.getRowCount();
+        messagingTemplate.convertAndSend("/topic/count", rowCount);
+        System.out.println("No of Excel Data in Row  : " + rowCount);
     }
 }
