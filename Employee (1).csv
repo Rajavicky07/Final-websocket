@@ -1,0 +1,12 @@
+transaction_id,date,customer_name,product_name,quantity,unit_price,total_amount
+1,2024-06-01,John Doe,Widget A,2,50,100
+2,2024-06-02,Jane Smith,Widget B,1,75,75
+3,2024-06-03,Michael Johnson,Widget A,3,50,150
+4,2024-06-04,Alice Brown,Widget C,2,100,200
+5,2024-06-05,David Lee,Widget B,1,75,75
+6,2024-06-06,Sarah Wilson,Widget A,1,50,50
+7,2024-06-07,Emily Davis,Widget C,3,100,300
+8,2024-06-08,James Miller,Widget A,2,50,100
+9,2024-06-09,Laura White,Widget B,1,75,75
+10,2024-06-10,Chris Taylor,Widget C,4,100,400
+
